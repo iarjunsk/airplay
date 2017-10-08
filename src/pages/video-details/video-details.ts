@@ -34,7 +34,7 @@ export class VideoDetailsPage {
   }
 
   videoURL(){
-    return this.video.url.bypassSecurityTrustUrl(this.mediaItems[1].url);
+    //return this.video.url.bypassSecurityTrustUrl(this.mediaItems[1].url);
   }
 
 }
