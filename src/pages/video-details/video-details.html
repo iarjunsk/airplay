@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar  color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>  <ion-icon name="ios-paper-plane"></ion-icon> Video Player </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  class="bg-style" >
+
+
+    <ion-card *ngIf="video">
+        
+
+        <ion-card-header>
+          <!-- <img src="{{video.cover_page}}" alt=""> 
+          <iframe width="420" height="315" src="{{video.url}}" frameborder="0" allowfullscreen></iframe> -->
+          <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(video.url)' width="420" height="315"
+                  frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+          </iframe>
+        </ion-card-header>
+
+        <ion-card-content>
+            <h2>{{video.name}}</h2>
+            <ion-badge color="danger" item-end> #{{video.category}}</ion-badge>
+            
+            <br><br>
+            
+            <p> {{video.description}} </p>
+
+            <rating [(ngModel)]="rate" 
+            readOnly="false" 
+            max="5" 
+            emptyStarIconName="star-outline" 
+            halfStarIconName="star-half" 
+            starIconName="star"
+            nullable="false"
+            (ngModelChange)="onRatingChanged($event)"></rating> 
+
+           
+        </ion-card-content>
+      </ion-card>
+
+
+      
+      <ion-fab right bottom>
+        <button ion-fab color="danger"><ion-icon name="ios-play" (click)="openYoutube()"></ion-icon></button>
+      </ion-fab>
+
+</ion-content>

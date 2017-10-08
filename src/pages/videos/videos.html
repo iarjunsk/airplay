@@ -1,0 +1,68 @@
+<ion-header>
+
+  <ion-navbar color="dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu" ></ion-icon>
+    </button>
+    <ion-title>  <ion-icon name="ios-paper-plane"></ion-icon> Airplay </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="bg-style">
+
+    <ion-item>
+      <ion-range min="0" max="{{duration}}" step="10" snaps="true"  [(ngModel)]="time_elapsed" color="icons" >
+        <ion-icon range-left small color="danger" name="md-plane"></ion-icon>
+        <ion-icon range-right color="danger" name="pin"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="
+    AirPlay for {{time_left}} min"></ion-searchbar>
+
+    <ion-item>
+    <ion-label>Category</ion-label>
+    <ion-select [(ngModel)]="color"  (ionChange)="applyColorFilter()" >
+      <ion-option value="all">All</ion-option>
+      <ion-option value="funny">Funny</ion-option>
+      <ion-option value="tedtalk">Ted Talks</ion-option>
+      <ion-option value="song">Songs</ion-option>
+      <ion-option value="trailer">Trailers</ion-option>
+      <ion-option value="movie">Movies</ion-option>
+      <ion-option value="tutorial">Tutorials</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-list>
+
+    <ion-item *ngFor="let video of videos | async" (click)="openVideoDetails(video)" >
+      
+      <ion-thumbnail item-start>
+        <img src="{{video.cover_page}}" onerror="this.src='assets/img/video-default.png'">
+      </ion-thumbnail>
+      
+      <button ion-button clear item-end><ion-icon name="arrow-forward"></ion-icon></button>
+
+      <ion-row>
+        <h2>{{ video.name }}</h2>
+        <p>{{video.description}}</p>
+        <ion-row>
+          <ion-badge color="danger"> {{video.duration}} min</ion-badge>
+          <p style="margin-left:20px; margin-right: 5px"> {{video.rating}}★   <ion-badge color="light"> {{video.category}} </ion-badge> </p>
+        </ion-row>
+      </ion-row>
+
+
+
+    </ion-item>
+
+
+  </ion-list>
+
+
+  
+</ion-content>
